@@ -8,11 +8,11 @@ public class RepositoryPoster {
     protected int limit;
     protected TemplatePoster[] posters = new TemplatePoster[0];
 
-    public void RepositoryPoster() {
+    public RepositoryPoster() {
         this.limit = 10;
     }
 
-    public void RepositoryPoster(int limit) {
+    public RepositoryPoster(int limit) {
         this.limit = limit;
     }
 
@@ -23,10 +23,10 @@ public class RepositoryPoster {
         }
         tmp[tmp.length - 1] = poster;
         posters = tmp;
-        return posters;
+        return posters.clone();
     }
 
-    public void removeById(int id) {
+    public TemplatePoster[] removeById(int id) {
         TemplatePoster[] tmp = new TemplatePoster[posters.length - 1];
         int temporaryCopy = 0;
         for (TemplatePoster poster : posters) {
@@ -34,26 +34,30 @@ public class RepositoryPoster {
                 tmp[temporaryCopy] = poster;
                 temporaryCopy++;
             }
+            posters = tmp;
         }
-        posters = tmp;
+        return posters.clone();
     }
 
     public TemplatePoster[] findAll() {
-        return posters == null ? null : posters.clone();
+        return posters.clone();
     }
 
     public TemplatePoster[] findById(int id) {
         for (TemplatePoster poster : posters) {
             if (poster.getId() == id) {
+                return posters.clone();
             }
-            return posters;
         }
         return null;
     }
 
-    public void removeAll() {
+
+    public TemplatePoster[] removeAll() {
         TemplatePoster[] tmp = new TemplatePoster[posters.length];
-        Arrays.fill(posters, 0);
+        Arrays.fill(tmp, 0);
+        posters = tmp;
+        return posters.clone();
     }
 
     public TemplatePoster[] findLast() {

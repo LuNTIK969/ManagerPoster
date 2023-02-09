@@ -6,7 +6,7 @@ import ru.netology.template.TemplatePoster;
 public class PosterManager {
     private RepositoryPoster repo;
 
-    public PosterManager(RepositoryPoster repo) {
+    protected PosterManager(RepositoryPoster repo) {
         this.repo = repo;
     }
 
@@ -14,8 +14,9 @@ public class PosterManager {
         repo.save(poster);
     }
 
-    public void removeById(int id) {
-        repo.removeById(id);
+    public TemplatePoster[] removeById(int id) {
+        TemplatePoster[] posters = repo.removeById(id);
+        return posters;
     }
 
     public TemplatePoster[] findAll() {
@@ -33,7 +34,8 @@ public class PosterManager {
         return posters;
     }
 
-    public void removeAll() {
-        repo.removeAll();
+    public TemplatePoster[] removeAll() {
+        TemplatePoster[] posters = repo.removeAll();
+        return posters;
     }
 }

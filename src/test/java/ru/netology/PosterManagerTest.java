@@ -46,4 +46,15 @@ class PosterManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void shouldRemoveByIdPoster() {
+        TemplatePoster[] posters = {posterOne, posterTwo, posterFour, posterFive};
+        doReturn(posters).when(repo).removeById(3);
+
+        TemplatePoster[] expected = {posterOne, posterTwo, posterFour, posterFive};
+        TemplatePoster[] actual = manager.removeById(3);
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
 }
